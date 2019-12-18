@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/AnGiang_1.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[10.15798698233272,104.74005668920631],[10.981890262645965,105.62915698898293]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        var layer_OpenStreetMap_0 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OpenStreetMap_0;
+        map.addLayer(layer_OpenStreetMap_0);
+        function pop_AnGiang_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? Autolinker.link(String(feature.properties['OBJECTID'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ADM1_CODE'] !== null ? Autolinker.link(String(feature.properties['ADM1_CODE'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ADM1_NAME'] !== null ? Autolinker.link(String(feature.properties['ADM1_NAME'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? Autolinker.link(String(feature.properties['Shape_Leng'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? Autolinker.link(String(feature.properties['Shape_Area'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ADM0'] !== null ? Autolinker.link(String(feature.properties['ADM0'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_AnGiang_1_0() {
+            return {
+                pane: 'pane_AnGiang_1',
+                opacity: 1,
+                color: 'rgba(228,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_AnGiang_1');
+        map.getPane('pane_AnGiang_1').style.zIndex = 401;
+        map.getPane('pane_AnGiang_1').style['mix-blend-mode'] = 'normal';
+        var layer_AnGiang_1 = new L.geoJson(json_AnGiang_1, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_AnGiang_1',
+            layerName: 'layer_AnGiang_1',
+            pane: 'pane_AnGiang_1',
+            onEachFeature: pop_AnGiang_1,
+            style: style_AnGiang_1_0,
+        });
+        bounds_group.addLayer(layer_AnGiang_1);
+        map.addLayer(layer_AnGiang_1);
+        var img_20170505_2 = 'data/20170505_2.png';
+        var img_bounds_20170505_2 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170505_2 = new L.imageOverlay(img_20170505_2, img_bounds_20170505_2);
+        bounds_group.addLayer(layer_20170505_2);
+        var img_20170511_3 = 'data/20170511_3.png';
+        var img_bounds_20170511_3 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170511_3 = new L.imageOverlay(img_20170511_3, img_bounds_20170511_3);
+        bounds_group.addLayer(layer_20170511_3);
+        var img_20170517_4 = 'data/20170517_4.png';
+        var img_bounds_20170517_4 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170517_4 = new L.imageOverlay(img_20170517_4, img_bounds_20170517_4);
+        bounds_group.addLayer(layer_20170517_4);
+        var img_20170523_5 = 'data/20170523_5.png';
+        var img_bounds_20170523_5 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170523_5 = new L.imageOverlay(img_20170523_5, img_bounds_20170523_5);
+        bounds_group.addLayer(layer_20170523_5);
+        var img_20170529_6 = 'data/20170529_6.png';
+        var img_bounds_20170529_6 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170529_6 = new L.imageOverlay(img_20170529_6, img_bounds_20170529_6);
+        bounds_group.addLayer(layer_20170529_6);
+        var img_20170604_7 = 'data/20170604_7.png';
+        var img_bounds_20170604_7 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170604_7 = new L.imageOverlay(img_20170604_7, img_bounds_20170604_7);
+        bounds_group.addLayer(layer_20170604_7);
+        var img_20170610_8 = 'data/20170610_8.png';
+        var img_bounds_20170610_8 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170610_8 = new L.imageOverlay(img_20170610_8, img_bounds_20170610_8);
+        bounds_group.addLayer(layer_20170610_8);
+        var img_20170616_9 = 'data/20170616_9.png';
+        var img_bounds_20170616_9 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170616_9 = new L.imageOverlay(img_20170616_9, img_bounds_20170616_9);
+        bounds_group.addLayer(layer_20170616_9);
+        var img_20170622_10 = 'data/20170622_10.png';
+        var img_bounds_20170622_10 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170622_10 = new L.imageOverlay(img_20170622_10, img_bounds_20170622_10);
+        bounds_group.addLayer(layer_20170622_10);
+        var img_20170628_11 = 'data/20170628_11.png';
+        var img_bounds_20170628_11 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170628_11 = new L.imageOverlay(img_20170628_11, img_bounds_20170628_11);
+        bounds_group.addLayer(layer_20170628_11);
+        var img_20170704_12 = 'data/20170704_12.png';
+        var img_bounds_20170704_12 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170704_12 = new L.imageOverlay(img_20170704_12, img_bounds_20170704_12);
+        bounds_group.addLayer(layer_20170704_12);
+        var img_20170710_13 = 'data/20170710_13.png';
+        var img_bounds_20170710_13 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170710_13 = new L.imageOverlay(img_20170710_13, img_bounds_20170710_13);
+        bounds_group.addLayer(layer_20170710_13);
+        var img_20170716_14 = 'data/20170716_14.png';
+        var img_bounds_20170716_14 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170716_14 = new L.imageOverlay(img_20170716_14, img_bounds_20170716_14);
+        bounds_group.addLayer(layer_20170716_14);
+        var img_20170722_15 = 'data/20170722_15.png';
+        var img_bounds_20170722_15 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170722_15 = new L.imageOverlay(img_20170722_15, img_bounds_20170722_15);
+        bounds_group.addLayer(layer_20170722_15);
+        var img_20170728_16 = 'data/20170728_16.png';
+        var img_bounds_20170728_16 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170728_16 = new L.imageOverlay(img_20170728_16, img_bounds_20170728_16);
+        bounds_group.addLayer(layer_20170728_16);
+        var img_20170803_17 = 'data/20170803_17.png';
+        var img_bounds_20170803_17 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170803_17 = new L.imageOverlay(img_20170803_17, img_bounds_20170803_17);
+        bounds_group.addLayer(layer_20170803_17);
+        var img_20170809_18 = 'data/20170809_18.png';
+        var img_bounds_20170809_18 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170809_18 = new L.imageOverlay(img_20170809_18, img_bounds_20170809_18);
+        bounds_group.addLayer(layer_20170809_18);
+        var img_20170815_19 = 'data/20170815_19.png';
+        var img_bounds_20170815_19 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170815_19 = new L.imageOverlay(img_20170815_19, img_bounds_20170815_19);
+        bounds_group.addLayer(layer_20170815_19);
+        var img_20170821_20 = 'data/20170821_20.png';
+        var img_bounds_20170821_20 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170821_20 = new L.imageOverlay(img_20170821_20, img_bounds_20170821_20);
+        bounds_group.addLayer(layer_20170821_20);
+        var img_20170827_21 = 'data/20170827_21.png';
+        var img_bounds_20170827_21 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170827_21 = new L.imageOverlay(img_20170827_21, img_bounds_20170827_21);
+        bounds_group.addLayer(layer_20170827_21);
+        var img_20170902_22 = 'data/20170902_22.png';
+        var img_bounds_20170902_22 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170902_22 = new L.imageOverlay(img_20170902_22, img_bounds_20170902_22);
+        bounds_group.addLayer(layer_20170902_22);
+        var img_20170908_23 = 'data/20170908_23.png';
+        var img_bounds_20170908_23 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170908_23 = new L.imageOverlay(img_20170908_23, img_bounds_20170908_23);
+        bounds_group.addLayer(layer_20170908_23);
+        var img_20170914_24 = 'data/20170914_24.png';
+        var img_bounds_20170914_24 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170914_24 = new L.imageOverlay(img_20170914_24, img_bounds_20170914_24);
+        bounds_group.addLayer(layer_20170914_24);
+        var img_20170920_25 = 'data/20170920_25.png';
+        var img_bounds_20170920_25 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170920_25 = new L.imageOverlay(img_20170920_25, img_bounds_20170920_25);
+        bounds_group.addLayer(layer_20170920_25);
+        var img_20170926_26 = 'data/20170926_26.png';
+        var img_bounds_20170926_26 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20170926_26 = new L.imageOverlay(img_20170926_26, img_bounds_20170926_26);
+        bounds_group.addLayer(layer_20170926_26);
+        var img_20171002_27 = 'data/20171002_27.png';
+        var img_bounds_20171002_27 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20171002_27 = new L.imageOverlay(img_20171002_27, img_bounds_20171002_27);
+        bounds_group.addLayer(layer_20171002_27);
+        var img_20171008_28 = 'data/20171008_28.png';
+        var img_bounds_20171008_28 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20171008_28 = new L.imageOverlay(img_20171008_28, img_bounds_20171008_28);
+        bounds_group.addLayer(layer_20171008_28);
+        var img_20171014_29 = 'data/20171014_29.png';
+        var img_bounds_20171014_29 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20171014_29 = new L.imageOverlay(img_20171014_29, img_bounds_20171014_29);
+        bounds_group.addLayer(layer_20171014_29);
+        var img_20171020_30 = 'data/20171020_30.png';
+        var img_bounds_20171020_30 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20171020_30 = new L.imageOverlay(img_20171020_30, img_bounds_20171020_30);
+        bounds_group.addLayer(layer_20171020_30);
+        var img_20171026_31 = 'data/20171026_31.png';
+        var img_bounds_20171026_31 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20171026_31 = new L.imageOverlay(img_20171026_31, img_bounds_20171026_31);
+        bounds_group.addLayer(layer_20171026_31);
+        var img_20171101_32 = 'data/20171101_32.png';
+        var img_bounds_20171101_32 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20171101_32 = new L.imageOverlay(img_20171101_32, img_bounds_20171101_32);
+        bounds_group.addLayer(layer_20171101_32);
+        var img_20171107_33 = 'data/20171107_33.png';
+        var img_bounds_20171107_33 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20171107_33 = new L.imageOverlay(img_20171107_33, img_bounds_20171107_33);
+        bounds_group.addLayer(layer_20171107_33);
+        var img_20171113_34 = 'data/20171113_34.png';
+        var img_bounds_20171113_34 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20171113_34 = new L.imageOverlay(img_20171113_34, img_bounds_20171113_34);
+        bounds_group.addLayer(layer_20171113_34);
+        var img_20171119_35 = 'data/20171119_35.png';
+        var img_bounds_20171119_35 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20171119_35 = new L.imageOverlay(img_20171119_35, img_bounds_20171119_35);
+        bounds_group.addLayer(layer_20171119_35);
+        var img_20171125_36 = 'data/20171125_36.png';
+        var img_bounds_20171125_36 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20171125_36 = new L.imageOverlay(img_20171125_36, img_bounds_20171125_36);
+        bounds_group.addLayer(layer_20171125_36);
+        var img_20171201_37 = 'data/20171201_37.png';
+        var img_bounds_20171201_37 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20171201_37 = new L.imageOverlay(img_20171201_37, img_bounds_20171201_37);
+        bounds_group.addLayer(layer_20171201_37);
+        var img_20171207_38 = 'data/20171207_38.png';
+        var img_bounds_20171207_38 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20171207_38 = new L.imageOverlay(img_20171207_38, img_bounds_20171207_38);
+        bounds_group.addLayer(layer_20171207_38);
+        var img_20171213_39 = 'data/20171213_39.png';
+        var img_bounds_20171213_39 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20171213_39 = new L.imageOverlay(img_20171213_39, img_bounds_20171213_39);
+        bounds_group.addLayer(layer_20171213_39);
+        var img_20171219_40 = 'data/20171219_40.png';
+        var img_bounds_20171219_40 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20171219_40 = new L.imageOverlay(img_20171219_40, img_bounds_20171219_40);
+        bounds_group.addLayer(layer_20171219_40);
+        var img_20171225_41 = 'data/20171225_41.png';
+        var img_bounds_20171225_41 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20171225_41 = new L.imageOverlay(img_20171225_41, img_bounds_20171225_41);
+        bounds_group.addLayer(layer_20171225_41);
+        var img_20171231_42 = 'data/20171231_42.png';
+        var img_bounds_20171231_42 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20171231_42 = new L.imageOverlay(img_20171231_42, img_bounds_20171231_42);
+        bounds_group.addLayer(layer_20171231_42);
+        var img_20180106_43 = 'data/20180106_43.png';
+        var img_bounds_20180106_43 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20180106_43 = new L.imageOverlay(img_20180106_43, img_bounds_20180106_43);
+        bounds_group.addLayer(layer_20180106_43);
+        var img_20180112_44 = 'data/20180112_44.png';
+        var img_bounds_20180112_44 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20180112_44 = new L.imageOverlay(img_20180112_44, img_bounds_20180112_44);
+        bounds_group.addLayer(layer_20180112_44);
+        var img_20180118_45 = 'data/20180118_45.png';
+        var img_bounds_20180118_45 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20180118_45 = new L.imageOverlay(img_20180118_45, img_bounds_20180118_45);
+        bounds_group.addLayer(layer_20180118_45);
+        var img_20180124_46 = 'data/20180124_46.png';
+        var img_bounds_20180124_46 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20180124_46 = new L.imageOverlay(img_20180124_46, img_bounds_20180124_46);
+        bounds_group.addLayer(layer_20180124_46);
+        var img_20180130_47 = 'data/20180130_47.png';
+        var img_bounds_20180130_47 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20180130_47 = new L.imageOverlay(img_20180130_47, img_bounds_20180130_47);
+        bounds_group.addLayer(layer_20180130_47);
+        var img_20180205_48 = 'data/20180205_48.png';
+        var img_bounds_20180205_48 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20180205_48 = new L.imageOverlay(img_20180205_48, img_bounds_20180205_48);
+        bounds_group.addLayer(layer_20180205_48);
+        var img_20180211_49 = 'data/20180211_49.png';
+        var img_bounds_20180211_49 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20180211_49 = new L.imageOverlay(img_20180211_49, img_bounds_20180211_49);
+        bounds_group.addLayer(layer_20180211_49);
+        var img_20180217_50 = 'data/20180217_50.png';
+        var img_bounds_20180217_50 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20180217_50 = new L.imageOverlay(img_20180217_50, img_bounds_20180217_50);
+        bounds_group.addLayer(layer_20180217_50);
+        var img_20180223_51 = 'data/20180223_51.png';
+        var img_bounds_20180223_51 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20180223_51 = new L.imageOverlay(img_20180223_51, img_bounds_20180223_51);
+        bounds_group.addLayer(layer_20180223_51);
+        var img_20180301_52 = 'data/20180301_52.png';
+        var img_bounds_20180301_52 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20180301_52 = new L.imageOverlay(img_20180301_52, img_bounds_20180301_52);
+        bounds_group.addLayer(layer_20180301_52);
+        var img_20180307_53 = 'data/20180307_53.png';
+        var img_bounds_20180307_53 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20180307_53 = new L.imageOverlay(img_20180307_53, img_bounds_20180307_53);
+        bounds_group.addLayer(layer_20180307_53);
+        var img_20180313_54 = 'data/20180313_54.png';
+        var img_bounds_20180313_54 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20180313_54 = new L.imageOverlay(img_20180313_54, img_bounds_20180313_54);
+        bounds_group.addLayer(layer_20180313_54);
+        var img_20180319_55 = 'data/20180319_55.png';
+        var img_bounds_20180319_55 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20180319_55 = new L.imageOverlay(img_20180319_55, img_bounds_20180319_55);
+        bounds_group.addLayer(layer_20180319_55);
+        var img_20180325_56 = 'data/20180325_56.png';
+        var img_bounds_20180325_56 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20180325_56 = new L.imageOverlay(img_20180325_56, img_bounds_20180325_56);
+        bounds_group.addLayer(layer_20180325_56);
+        var img_20180331_57 = 'data/20180331_57.png';
+        var img_bounds_20180331_57 = [[10.178174567954263,104.7778358391899],[10.961665544881457,105.59039693725607]];
+        var layer_20180331_57 = new L.imageOverlay(img_20180331_57, img_bounds_20180331_57);
+        bounds_group.addLayer(layer_20180331_57);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{"20180331": layer_20180331_57,"20180325": layer_20180325_56,"20180319": layer_20180319_55,"20180313": layer_20180313_54,"20180307": layer_20180307_53,"20180301": layer_20180301_52,"20180223": layer_20180223_51,"20180217": layer_20180217_50,"20180211": layer_20180211_49,"20180205": layer_20180205_48,"20180130": layer_20180130_47,"20180124": layer_20180124_46,"20180118": layer_20180118_45,"20180112": layer_20180112_44,"20180106": layer_20180106_43,"20171231": layer_20171231_42,"20171225": layer_20171225_41,"20171219": layer_20171219_40,"20171213": layer_20171213_39,"20171207": layer_20171207_38,"20171201": layer_20171201_37,"20171125": layer_20171125_36,"20171119": layer_20171119_35,"20171113": layer_20171113_34,"20171107": layer_20171107_33,"20171101": layer_20171101_32,"20171026": layer_20171026_31,"20171020": layer_20171020_30,"20171014": layer_20171014_29,"20171008": layer_20171008_28,"20171002": layer_20171002_27,"20170926": layer_20170926_26,"20170920": layer_20170920_25,"20170914": layer_20170914_24,"20170908": layer_20170908_23,"20170902": layer_20170902_22,"20170827": layer_20170827_21,"20170821": layer_20170821_20,"20170815": layer_20170815_19,"20170809": layer_20170809_18,"20170803": layer_20170803_17,"20170728": layer_20170728_16,"20170722": layer_20170722_15,"20170716": layer_20170716_14,"20170710": layer_20170710_13,"20170704": layer_20170704_12,"20170628": layer_20170628_11,"20170622": layer_20170622_10,"20170616": layer_20170616_9,"20170610": layer_20170610_8,"20170604": layer_20170604_7,"20170529": layer_20170529_6,"20170523": layer_20170523_5,"20170517": layer_20170517_4,"20170511": layer_20170511_3,"20170505": layer_20170505_2,'<img src="legend/AnGiang_1.png" /> AnGiang': layer_AnGiang_1,"OpenStreetMap": layer_OpenStreetMap_0,}).addTo(map);
+        setBounds();
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
+        </script>
+    </body>
+</html>
